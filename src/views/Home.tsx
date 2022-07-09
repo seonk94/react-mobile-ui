@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import Dialog from '@/components/dialog/Dialog';
 
 function Home() {
-  return <div>home</div>;
+  const [open, setOpen] = useState(false);
+  return (
+    <div>
+      home
+      <button onClick={() => setOpen(!open)}>toggle</button>
+      <Dialog open={open} onClose={() => setOpen(false)}>
+        body
+      </Dialog>
+    </div>
+  );
 }
 
 export default Home;
