@@ -1,16 +1,29 @@
+import { Button, Grid, Stack } from '@mui/material';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import Dialog from '@/components/dialog/Dialog';
+import { routeMap } from '@/App';
 
 function Home() {
-  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const buttonClickHandler = (path: string) => {
+    navigate(path);
+  };
   return (
     <div>
-      home
-      <button onClick={() => setOpen(!open)}>toggle</button>
-      <Dialog open={open} onClose={() => setOpen(false)}>
-        body
-      </Dialog>
+      <Stack spacing={2} direction="column">
+        {routeMap.map((item) => (
+          <Button
+            fullWidth
+            key={item.name}
+            onClick={() => buttonClickHandler(item.path)}
+            variant="contained"
+          >
+            {item.name}
+          </Button>
+        ))}
+      </Stack>
     </div>
   );
 }
