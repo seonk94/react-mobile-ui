@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-export const useScrollAware = () => {
+export const useScroll = () => {
   const [scrollTop, setScrollTop] = useState(0);
   const ref = useRef<HTMLDivElement | null>(null);
 

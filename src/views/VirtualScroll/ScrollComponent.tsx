@@ -1,32 +1,30 @@
 import React, { memo, useMemo } from 'react';
 
 import { ItemType } from '.';
-import { useScrollAware } from './useScroll';
+import { useScroll } from './useScroll';
 
 interface Props {
-  Item: any;
-  itemCount: number;
+  Item: (args: any) => JSX.Element;
   options: Array<ItemType>;
   height: number;
   childHeight: number;
-  renderAhread: number;
+  restItem?: number;
 }
 
 function ScrollComponent({
   Item,
-  itemCount,
   options,
   height,
   childHeight,
-  renderAhread = 20,
+  restItem = 20,
 }: Props) {
-  const { scrollTop, ref } = useScrollAware();
+  const itemCount = options.length;
+  const { scrollTop, ref } = useScroll();
   const totalHeight = itemCount * childHeight;
 
-  let startNode = Math.floor(scrollTop / childHeight) - renderAhread;
+  let startNode = Math.floor(scrollTop / childHeight) - restItem;
   startNode = Math.max(0, startNode);
-
-  let visibleNodeCount = Math.ceil(height / childHeight) + 2 * renderAhread;
+  let visibleNodeCount = Math.ceil(height / childHeight) + 2 * restItem;
   visibleNodeCount = Math.min(itemCount - startNode, visibleNodeCount);
 
   const offsetY = startNode * childHeight;
@@ -34,15 +32,12 @@ function ScrollComponent({
   const visibleChildren = useMemo(() => {
     return new Array(visibleNodeCount)
       .fill(null)
-      .map((_, index) => (
-        <Item item={options[index + startNode]} key={index + startNode} />
-      ));
+      .map((_, index) => Item(options[index + startNode]));
   }, [startNode, visibleNodeCount, Item, options]);
 
   return (
     <div style={{ height, overflow: 'auto' }} ref={ref}>
       <div
-        className="viewport"
         style={{
           overflow: 'hidden',
           willChange: 'transform',

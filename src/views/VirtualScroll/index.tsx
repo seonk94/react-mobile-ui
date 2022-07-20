@@ -20,8 +20,8 @@ createDummy();
 interface ItemProps {
   item: ItemType;
 }
-// eslint-disable-next-line react/display-name
-const ListItem: any = ({ item }: ItemProps) => {
+
+const ListItem: React.FC<ItemProps> = ({ item }) => {
   return <li key={item.id}>{item.text}</li>;
 };
 
@@ -30,12 +30,10 @@ function VirtualScroll() {
     <div>
       <h3>Virtual Scroll</h3>
       <ScrollComponent
-        Item={ListItem}
+        Item={(item: ItemType) => <li key={item.id}>{item.text}</li>}
         options={dummy}
         height={500}
         childHeight={21}
-        itemCount={dummy.length}
-        renderAhread={20}
       />
     </div>
   );
