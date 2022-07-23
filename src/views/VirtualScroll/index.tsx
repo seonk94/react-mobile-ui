@@ -21,11 +21,7 @@ interface ItemProps {
   item: ItemType;
 }
 
-const ListItem: React.FC<ItemProps> = ({ item }) => {
-  return <li key={item.id}>{item.text}</li>;
-};
-
-function VirtualScroll() {
+function VirtualScrollPage() {
   return (
     <div>
       <h3>Virtual Scroll</h3>
@@ -39,4 +35,4 @@ function VirtualScroll() {
   );
 }
 
-export default VirtualScroll;
+export default VirtualScrollPage;

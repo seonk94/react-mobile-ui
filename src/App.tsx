@@ -1,18 +1,18 @@
-import React, { Suspense, useEffect } from 'react';
-import { lazy, useState } from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import React, { Suspense } from 'react';
+import { lazy } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
 const Home = lazy(() => import('@/views/Home'));
 export const routeMap = [
   {
-    path: '/virtualScroll',
+    path: '/virtual-scroll',
     name: 'VirtualScroll',
     element: lazy(() => import('@/views/VirtualScroll')),
   },
   {
-    path: '/masonry',
-    name: 'Masonry',
-    element: lazy(() => import('@/views/Masonry')),
+    path: '/grid-masonry',
+    name: 'GridMasonry',
+    element: lazy(() => import('@/views/GridMasonry')),
   },
 ];
 
