@@ -14,6 +14,11 @@ export const routeMap = [
     name: 'GridMasonry',
     element: lazy(() => import('@/views/GridMasonry')),
   },
+  {
+    path: '/masonry',
+    name: 'Masonry',
+    element: lazy(() => import('@/views/Masonry')),
+  },
 ];
 
 function App() {

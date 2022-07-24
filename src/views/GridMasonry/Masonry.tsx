@@ -22,7 +22,7 @@ interface Props {
     height: number;
   }>;
 }
-const Masonry: React.FC<Props> = ({ items }: Props) => {
+const Masonry: React.FC<Props> = ({ items }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [containerStyle, setContainerStyle] = useState<{
     rowGap: number;

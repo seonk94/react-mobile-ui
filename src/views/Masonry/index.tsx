@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Masonry from './Masonry';
+import Masonry from './Masnory';
 
 interface ItemType {
   width: string;
@@ -22,13 +22,13 @@ const items: ItemType[] = [];
   }
 })();
 
-function MasonryPage() {
+function MasnoryPage() {
   return (
     <div>
-      <h3>Grid Masonry</h3>
-      <Masonry items={items} />
+      <h3>Masnory</h3>
+      <Masonry columnCount={4} items={items} />
     </div>
   );
 }
 
-export default MasonryPage;
+export default MasnoryPage;
