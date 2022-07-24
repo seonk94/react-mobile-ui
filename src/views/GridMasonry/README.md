@@ -1,3 +1,3 @@
-# MASONRY 
+# Grid MASONRY 
 
-// 563492ad6f91700001000001026fbed154c2485fb1b992a953d77f2c
+- Grid Css 를 이용한 masonry layout 구현.

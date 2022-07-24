@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Masonry from './Masnory';
+import Masonry from './Masonry';
 
 interface ItemType {
   width: string;
@@ -17,15 +17,22 @@ const createBox = () => {
 const items: ItemType[] = [];
 
 (function init() {
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 1000; i++) {
     items.push(createBox());
   }
 })();
 
 function MasnoryPage() {
   return (
-    <div>
+    <div
+      style={{
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
       <h3>Masnory</h3>
+
       <Masonry columnCount={4} items={items} />
     </div>
   );

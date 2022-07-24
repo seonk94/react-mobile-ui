@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { ItemType } from './Masnory';
+import { ItemType } from './Masonry';
 
 interface Props {
   item: ItemType;
 }
-const MasnoryItem: React.FC<Props> = ({ item }) => {
+const MasonryItem: React.FC<Props> = ({ item }) => {
   const style: React.CSSProperties = {
     position: 'absolute',
     top: item.y,
@@ -17,4 +17,4 @@ const MasnoryItem: React.FC<Props> = ({ item }) => {
   return <div style={style}>item</div>;
 };
 
-export default MasnoryItem;
+export default MasonryItem;

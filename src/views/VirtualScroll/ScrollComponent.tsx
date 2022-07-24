@@ -1,7 +1,8 @@
 import React, { memo, useMemo } from 'react';
 
+import { useScroll } from '@/libs';
+
 import { ItemType } from '.';
-import { useScroll } from './useScroll';
 
 interface Props {
   Item: (args: any) => JSX.Element;

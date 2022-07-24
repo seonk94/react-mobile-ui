@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
-import MasnoryItem from './MasnoryItem';
+import { useScroll } from '@/libs';
+
+import MasonryItem from './MasonryItem';
 
 export interface ItemType {
   x: number;
@@ -31,6 +33,8 @@ const Masonry: React.FC<Props> = ({
   columnGap = COLUMN_GAP,
   columnWidth = COLUMN_WIDTH,
 }) => {
+  const { scrollTop, ref: containerRef } = useScroll();
+
   const [columns, setColumns] = useState<ItemType[][]>(
     new Array(columnCount).fill([])
   );
@@ -92,18 +96,49 @@ const Masonry: React.FC<Props> = ({
     setColumns(newColumns);
   }, [items]);
 
+  const visibleItems = useMemo(() => {
+    const clientHeight = containerRef.current?.clientHeight || 0;
+    const rest = clientHeight / 2;
+
+    const start = scrollTop - rest;
+    const finish = scrollTop + clientHeight + rest;
+
+    const result: ItemType[] = [];
+
+    columns.forEach((column) => {
+      column.forEach((item) => {
+        if (item.y >= start && item.y <= finish) {
+          result.push(item);
+        }
+      });
+    });
+
+    return result;
+  }, [scrollTop, columns]);
+
   return (
     <div
       style={{
-        position: 'relative',
-        margin: 'auto',
-        width: `${columnWidth * columnCount + columnGap * (columnCount - 1)}px`,
-        height: `${height}px`,
+        overflow: 'auto',
+        height: '100%',
       }}
+      ref={containerRef}
     >
-      {columns.flat().map((item, index) => (
-        <MasnoryItem key={index} item={item} />
-      ))}
+      <div
+        style={{
+          position: 'relative',
+          margin: 'auto',
+
+          width: `${
+            columnWidth * columnCount + columnGap * (columnCount - 1)
+          }px`,
+          height: `${height}px`,
+        }}
+      >
+        {visibleItems.map((item, index) => (
+          <MasonryItem key={index} item={item} />
+        ))}
+      </div>
     </div>
   );
 };
